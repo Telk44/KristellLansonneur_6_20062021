@@ -1,5 +1,6 @@
-const Sauce = require('../models/Sauce');
 const fs = require('fs');//package qui permet de modifier ou supprimer des fichiers
+const Sauce = require('../models/Sauce');
+
 
 //création d'une sauce
 exports.createSauce= (req, res, next) => {

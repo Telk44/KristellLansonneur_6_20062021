@@ -6,8 +6,10 @@ const path = require('path');
 const helmet = require('helmet'); //pour protéger l'application des vulnérabilités du web en configurant correctement les entêtes http
 const mongoSanitize = require('express-mongo-sanitize');//pour prévenir les opérations d'injection sur la BDD
 
+require('dotenv').config();
+
 //connexion à la base de données MongoDB
-mongoose.connect('mongodb+srv://krik:lougascoplan44@cluster0.lokpb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@cluster0.lokpb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))

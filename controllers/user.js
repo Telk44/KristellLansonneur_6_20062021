@@ -2,10 +2,11 @@ const bcrypt = require ('bcrypt'); //importation du package de chiffrement bcryp
 const User = require ('../models/User'); //importation du modèle d'utilisateur
 const jwt = require('jsonwebtoken'); //importation du package jsonwebtoken, permet échange et verification des données entre interlocuteurs
 const cryptoJS = require('crypto-js'); // importation de crypto JS pour crypter le mail
+require('dotenv').config();//utilisation des variables d'environnement
 
 //création compte utilisateur
 exports.signup = (req, res, next) => {
-  const cryptedEmail = cryptoJS.HmacSHA256(req.body.email, "secret key 123").toString();
+  const cryptedEmail = cryptoJS.HmacSHA256(req.body.email, process.env.MAIL_SECRET_KEY).toString();
   console.log(cryptedEmail)
   bcrypt.hash(req.body.password, 10) //appel fonction de hachage de bcrypt dans mot de passe - mdp salé 10fois
     // Création d'un nouvel utilisateur et enregistrement dans la BDD
@@ -24,7 +25,7 @@ exports.signup = (req, res, next) => {
 
 //connection compte utilisateur
 exports.login = (req, res, next) => {
-  const cryptedEmail = cryptoJS.HmacSHA256(req.body.email,  "secret key 123").toString();
+  const cryptedEmail = cryptoJS.HmacSHA256(req.body.email,  process.env.MAIL_SECRET_KEY).toString();
   User.findOne({email: cryptedEmail})
     .then(user => {
       if (!user) {
@@ -39,7 +40,7 @@ exports.login = (req, res, next) => {
             userId: user._id,
             token: jwt.sign(
               { userId: user._id },
-              '5E90E2511C9E629F86ACBB4762CF7A6B4C726D4AF780C8EEA040BA0A036CA233',
+              'process.env.DB_TOKEN',
               { expiresIn: '24h' }
             )
           });
