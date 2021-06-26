@@ -3,7 +3,6 @@ const app = require('./app');
 
 const normalizePort = val => {
   const port = parseInt(val, 10);
-
   if (isNaN(port)) {
     return val;
   }
@@ -35,7 +34,7 @@ const errorHandler = error => {
   }
 };
 
-const server = http.createServer(app); //création serveur
+const server = http.createServer(app); //création serveur-- a chaque fois qu'on envoie requête au serveur, cette fonction sera appelée
 
 server.on('error', errorHandler);
 server.on('listening', () => {

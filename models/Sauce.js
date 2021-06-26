@@ -1,3 +1,4 @@
+//importation mongoose= bibliotheque JS pour créer des schemas, structurer les données dans la BDD
 const mongoose = require('mongoose');
 
 const sauceSchema = mongoose.Schema({

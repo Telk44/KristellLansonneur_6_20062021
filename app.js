@@ -15,8 +15,9 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONG
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
 
-const app = express();
+const app = express();//creation application express
 
+//ajout headers à notre objet response pour permettre application d'acceder à l'API et contourner le CORS
 app.use((req, res, next) => {
    res.setHeader('Access-Control-Allow-Origin', '*');
    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
@@ -42,4 +43,4 @@ app.use('/api/auth', userRoutes);
 //rendre les images accessibles publiquement pour toutes les requêtes vers la route /images
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-module.exports = app;
+module.exports = app;//export de app pour pouvoir l'utiliser depuis serveur Node

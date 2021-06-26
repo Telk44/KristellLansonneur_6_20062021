@@ -1,6 +1,6 @@
 const bcrypt = require ('bcrypt'); //importation du package de chiffrement bcrypt pour protéger et hasher et saler le mdp
 const User = require ('../models/User'); //importation du modèle d'utilisateur
-const jwt = require('jsonwebtoken'); //importation du package jsonwebtoken, permet échange et verification des données entre interlocuteurs
+const jwt = require('jsonwebtoken'); //importation du package jsonwebtoken, permet échange et vérification des données entre interlocuteurs
 const cryptoJS = require('crypto-js'); // importation de crypto JS pour crypter le mail
 require('dotenv').config();//utilisation des variables d'environnement
 

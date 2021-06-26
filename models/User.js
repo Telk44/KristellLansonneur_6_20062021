@@ -1,5 +1,7 @@
-const mongoose = require('mongoose'); //importation mongoose
-const uniqueValidator = require('mongoose-unique-validator'); //package de validation pour pré-valider les informations avant de les enregistrer dans la BDD
+//importation mongoose
+const mongoose = require('mongoose'); 
+//package de validation pour pré-valider les informations avant de les enregistrer dans la BDD
+const uniqueValidator = require('mongoose-unique-validator'); 
 
 //création d'un schema de données utilisateur
 const userSchema = mongoose.Schema({

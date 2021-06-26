@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const router = express.Router();//creation d'un router avec méthode de express
 const auth = require('../middleware/auth');//importation du middleware auth pour appliquer sur routes qu'on veut protéger
 const multer = require('../middleware/multer-config');//importation multer pour gérer les fichiers entrants
 const saucesCtrl = require('../controllers/sauces');

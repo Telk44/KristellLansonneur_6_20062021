@@ -9,7 +9,6 @@ exports.createSauce= (req, res, next) => {
     const sauce = new Sauce({
       ...sauceObject,
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-
     });
     sauce.save()
       .then(() => res.status(201).json({ message: 'Sauce enregistrée !'}))
@@ -66,14 +65,14 @@ exports.tasteSauce = (req, res, next) => {
           .then((sauce) => res.status(200).json({ message: 'Un like de plus!' }))
           .catch(error => res.status(400).json({ error }));
   } else if (like === -1) { // si utilisateur n'aime pas la sauce et dont l'userId n'est pas enregistré
-      Sauce.updateOne({ _id: sauceId}, { $inc: {dislikes:+1}, $push: {usersDisliked: userId} }) // on ajoute 1 dislike et et ajoute l'id de l'utilisateur dans le tableau usersDisliked 
+      Sauce.updateOne({ _id: sauceId}, { $inc: {dislikes:+1}, $push: {usersDisliked: userId} }) //on ajoute 1 dislike et on ajoute l'id de l'utilisateur dans le tableau usersDisliked 
           .then((sauce) => res.status(200).json({message: 'un dislike de plus !'}))
           .catch(error => res.status(400).json({ error }));
   } else { // si l'utilisateur enlève son vote ou veut revoter
       Sauce.findOne({ _id: sauceId })
           .then(sauce => {
               if (sauce.usersLiked.includes(userId)) { // si le tableau usersLiked contient le userId de celui qui enlève son like 
-                  Sauce.updateOne({ _id: sauceId}, { $pull: {usersLiked: userId}, $inc: {likes: -1} }) // $pull : ça vide l'array userLiked et ça enleve un like sinon le meme utilisateur pourrai ajouter plusieurs like
+                  Sauce.updateOne({ _id: sauceId}, { $pull: {usersLiked: userId}, $inc: {likes: -1} }) // $pull : ça vide l'array userLiked et ça enleve un like sinon le même utilisateur pourrait ajouter plusieurs like
                       .then((sauce) => { res.status(200).json({ message: 'Un like de moins !' }) })
                       .catch(error => res.status(400).json({ error }))
               }
